@@ -24,5 +24,13 @@ namespace GaussGun
         {
             InitializeComponent();
         }
+
+        private void Button1ClickHandler(object sender, RoutedEventArgs e)
+        {
+            listBox1.Items.Clear();
+            Experiment.ListAllWindows().ForEach((wnd) => {
+                listBox1.Items.Add(wnd.Title);
+            });
+        }
     }
 }
