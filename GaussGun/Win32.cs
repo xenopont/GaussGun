@@ -24,8 +24,8 @@ namespace GaussGun
         public static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("dwmapi.dll")]
-        public static extern int DwmGetWindowAttribute(IntPtr hWnd, DwmWindowAttribute attributeName,
-            ref int attributeValue, int attributeReceivedSize);
+        public static extern uint DwmGetWindowAttribute(IntPtr hWnd, DwmWindowAttribute attributeName,
+            ref int attributeValue, int cbSize);
         public enum DwmWindowAttribute: uint
         {
             DWMWA_NCRENDERING_ENABLED = 1,

@@ -30,7 +30,7 @@ namespace GaussGun
                 string title = GetWindowTitle(hWnd);
                 if (true)
                 {
-                    windows.Add(new Win32Window(hWnd, title + (isCloaked ? " CLOACKED" : "")));
+                    windows.Add(new Win32Window(hWnd, title + (isCloaked ? " CLOAKED" : "")));
                 }
                 return true;
             }, 0);
@@ -45,9 +45,9 @@ namespace GaussGun
 
         private static bool IsWindowCloaked(IntPtr hWnd)
         {
-            int IsCloaked = 0;
-            
-            return Win32.DwmGetWindowAttribute(hWnd, Win32.DwmWindowAttribute.DWMWA_CLOAKED, ref IsCloaked, sizeof(int)) > 0 && IsCloaked > 0;
+            int isCloaked = 0;
+            uint ret = Win32.DwmGetWindowAttribute(hWnd, Win32.DwmWindowAttribute.DWMWA_CLOAKED, ref isCloaked, 4);
+            return ret == 0 && isCloaked > 0;
         }
 
         private static string GetWindowTitle(IntPtr hWnd)
