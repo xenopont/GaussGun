@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GaussGun"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Experiment Window" Height="450" Width="800">
     <Grid>
         <ListBox x:Name="listBox1" VerticalAlignment="Top" HorizontalAlignment="Right"
                  Width="212" Height="360" Margin="8"/>

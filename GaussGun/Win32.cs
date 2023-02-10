@@ -17,8 +17,14 @@ namespace GaussGun
         [DllImport("user32.dll")]
         public static extern int IsWindowVisible(IntPtr hWnd);
 
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowTextLength(IntPtr hWnd);
+
         [DllImport("dwmapi.dll")]
-        public static extern void DwmGetWindowAttribute(IntPtr hWnd, DwmWindowAttribute attributeName,
+        public static extern int DwmGetWindowAttribute(IntPtr hWnd, DwmWindowAttribute attributeName,
             ref int attributeValue, int attributeReceivedSize);
         public enum DwmWindowAttribute: uint
         {
