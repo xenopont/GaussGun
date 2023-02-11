@@ -27,10 +27,11 @@ namespace GaussGun
             _ = Win32.EnumWindows((IntPtr hWnd, int lParam) =>
             {
                 bool isCloaked = IsWindowCloaked(hWnd);
+                bool isIconic = Win32.IsIconic(hWnd);
                 string title = GetWindowTitle(hWnd);
-                if (true)
+                if (IsWindowVisible(hWnd) && !isCloaked && !isIconic)
                 {
-                    windows.Add(new Win32Window(hWnd, title + (isCloaked ? " CLOAKED" : "")));
+                    windows.Add(new Win32Window(hWnd, $"{title} ({hWnd})"));
                 }
                 return true;
             }, 0);
