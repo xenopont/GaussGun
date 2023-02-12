@@ -29,7 +29,7 @@ namespace GaussGun
         {
             listBox1.Items.Clear();
             Experiment.ListAllWindows().ForEach((wnd) => {
-                listBox1.Items.Add(wnd.Title);
+                listBox1.Items.Add(wnd.title);
             });
         }
     }

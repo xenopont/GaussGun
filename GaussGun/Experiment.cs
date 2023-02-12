@@ -11,12 +11,16 @@ namespace GaussGun
         public class Win32Window
         {
             public readonly IntPtr hWnd;
-            public readonly string Title;
+            public readonly string title;
+            public readonly bool isIconic;
+            public readonly Win32.Rect rect;
 
-            public Win32Window(IntPtr hWnd, string title)
+            public Win32Window(IntPtr hWnd, string title, bool isIconic, Win32.Rect rect)
             {
                 this.hWnd = hWnd;
-                Title = title;
+                this.title = title;
+                this.isIconic = isIconic;
+                this.rect = rect;
             }
         }
 
@@ -29,9 +33,10 @@ namespace GaussGun
                 bool isCloaked = IsWindowCloaked(hWnd);
                 bool isIconic = Win32.IsIconic(hWnd);
                 string title = GetWindowTitle(hWnd);
-                if (IsWindowVisible(hWnd) && !isCloaked && !isIconic)
+                Win32.GetWindowRect(hWnd, out var rect);
+                if (IsWindowVisible(hWnd) && !isCloaked)
                 {
-                    windows.Add(new Win32Window(hWnd, $"{title} ({hWnd})"));
+                    windows.Add(new Win32Window(hWnd, $"{title} {rect}", isIconic, rect));
                 }
                 return true;
             }, 0);

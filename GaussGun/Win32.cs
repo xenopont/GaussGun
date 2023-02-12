@@ -9,6 +9,19 @@ namespace GaussGun
 {
     internal class Win32
     {
+        public struct Rect
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+
+            override public string ToString()
+            {
+                return $"Rect({left}, {top}; {right}, {bottom})";
+            }
+        }
+
         public delegate bool CallBackPtr(IntPtr hWnd, int lParam);
 
         [DllImport("user32.dll")]
@@ -20,6 +33,9 @@ namespace GaussGun
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool IsIconic(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hWnd, out Rect lpRect);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
