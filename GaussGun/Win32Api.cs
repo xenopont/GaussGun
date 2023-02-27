@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -13,6 +14,10 @@ namespace GaussGun
             {
                 return callback(hWnd);
             }, 0);
+        }
+
+        public static IntPtr GetDesktopWindow() {
+            return RawApi.GetDesktopWindow();
         }
 
         public static Rectangle GetWindowRectangle(IntPtr hWnd)
@@ -93,7 +98,17 @@ namespace GaussGun
             {
                 return $"[{Left}, {Top}; {Width}, {Height}]";
             }
-        } 
+
+            public static bool operator ==(Rectangle r1, Rectangle r2) {
+                return r1.Left == r2.Left && r1.Top == r2.Top &&
+                    r1.Width == r2.Width && r1.Height == r2.Height;
+            }
+
+            public static bool operator !=(Rectangle r1, Rectangle r2) {
+                return r1.Left != r2.Left || r1.Top != r2.Top ||
+                    r1.Width != r2.Width || r1.Height != r2.Height;
+            }
+        }
 
         private static class RawApi
         {
@@ -130,6 +145,9 @@ namespace GaussGun
             public delegate bool WNDENUMPROC(IntPtr hWnd, int lParam);
             [DllImport(DLL_USER_32)]
             public static extern int EnumWindows(WNDENUMPROC EnumWindowsProc, int lParam);
+
+            [DllImport(DLL_USER_32)]
+            public static extern IntPtr GetDesktopWindow();
 
             [DllImport(DLL_USER_32)]
             public static extern int GetWindowRect(IntPtr hWnd, out RECT lpRect);
