@@ -3,13 +3,10 @@ using System.CodeDom;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace GaussGun
-{
-    internal class Win32Api
-    {
+namespace GaussGun {
+    internal class Win32Api {
         public delegate bool EnumerateWindowsCallback(IntPtr hWnd);
-        public static void EnumerateWindows(EnumerateWindowsCallback callback)
-        {
+        public static void EnumerateWindows(EnumerateWindowsCallback callback) {
             _ = RawApi.EnumWindows((IntPtr hWnd, int lParam) =>
             {
                 return callback(hWnd);
@@ -20,8 +17,7 @@ namespace GaussGun
             return RawApi.GetDesktopWindow();
         }
 
-        public static Rectangle GetWindowRectangle(IntPtr hWnd)
-        {
+        public static Rectangle GetWindowRectangle(IntPtr hWnd) {
             int hResult = RawApi.GetWindowRect(hWnd, out RawApi.RECT rectangle);
             if (hResult == 0)
             {
@@ -37,8 +33,7 @@ namespace GaussGun
         }
 
         #region Remove after window title is not needed
-        public static string GetWindowTitle(IntPtr hWnd)
-        {
+        public static string GetWindowTitle(IntPtr hWnd) {
             int length = RawApi.GetWindowTextLength(hWnd);
             if (length <= 0)
             {
@@ -54,8 +49,7 @@ namespace GaussGun
         }
         #endregion
 
-        public static bool IsWindowCloaked(IntPtr hWnd)
-        {
+        public static bool IsWindowCloaked(IntPtr hWnd) {
             int isCloaked = 0;
             uint hResult = RawApi.DwmGetWindowAttribute(
                 hWnd,
@@ -67,25 +61,21 @@ namespace GaussGun
             return hResult == 0 && isCloaked > 0;
         }
 
-        public static bool IsWindowIconic(IntPtr hWnd)
-        {
+        public static bool IsWindowIconic(IntPtr hWnd) {
             return RawApi.IsIconic(hWnd) > 0;
         }
 
-        public static bool IsWindowVisible(IntPtr hWnd)
-        {
+        public static bool IsWindowVisible(IntPtr hWnd) {
             return RawApi.IsWindowVisible(hWnd) > 0;
         }
 
-        public readonly struct Rectangle
-        {
+        public readonly struct Rectangle {
             public readonly int Left;
             public readonly int Top;
             public readonly int Width;
             public readonly int Height;
 
-            public Rectangle(int left, int top, int width, int height)
-            {
+            public Rectangle(int left, int top, int width, int height) {
                 Left = left;
                 Top = top;
                 Width = width;
@@ -94,8 +84,7 @@ namespace GaussGun
 
             public Rectangle() : this(0, 0, 0, 0) { }
 
-            public override string ToString()
-            {
+            public override string ToString() {
                 return $"[{Left}, {Top}; {Width}, {Height}]";
             }
 
@@ -110,8 +99,7 @@ namespace GaussGun
             }
         }
 
-        private static class RawApi
-        {
+        private static class RawApi {
             private const string DLL_DWM_API = "dwmapi.dll";
             private const string DLL_USER_32 = "user32.dll";
 
@@ -122,8 +110,7 @@ namespace GaussGun
                 ref int attributeValue,
                 int cbSize
             );
-            public enum DwmWindowAttribute : uint
-            {
+            public enum DwmWindowAttribute : uint {
                 DWMWA_NCRENDERING_ENABLED = 1,
                 DWMWA_NCRENDERING_POLICY,
                 DWMWA_TRANSITIONS_FORCEDISABLED,
@@ -166,8 +153,7 @@ namespace GaussGun
             [DllImport(DLL_USER_32)]
             public static extern int IsWindowVisible(IntPtr hWnd);
 
-            public struct RECT
-            {
+            public struct RECT {
                 public int left;
                 public int top;
                 public int right;

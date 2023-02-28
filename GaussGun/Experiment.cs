@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GaussGun
-{
+namespace GaussGun {
     internal class Experiment {
-        public class Win32Window
-        {
+        public class Win32Window {
             public readonly IntPtr hWnd;
             public readonly string title;
             public readonly bool isIconic;
@@ -18,8 +16,7 @@ namespace GaussGun
                 bool isIconic,
                 Win32Api.Rectangle rectangle,
                 uint zOrder
-            )
-            {
+            ) {
                 this.hWnd = hWnd;
                 this.title = title;
                 this.isIconic = isIconic;
@@ -28,8 +25,7 @@ namespace GaussGun
             }
         }
 
-        public static List<Win32Window> ListAllWindows()
-        {
+        public static List<Win32Window> ListAllWindows() {
             List<Win32Window> windows = new();
             uint zOrder = 0;
 
