@@ -10,4 +10,9 @@
         <ApplicationIcon>Assets\TrayIcon\TrayIcon.ico</ApplicationIcon>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Icons\TrayIcon\TrayIcon.ico" />
+      <Resource Include="Resources\Icons\TrayIcon\TrayIcon.ico" />
+    </ItemGroup>
+
 </Project>
