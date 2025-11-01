@@ -7,12 +7,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
         <UseWindowsForms>true</UseWindowsForms>
-        <ApplicationIcon>Assets\TrayIcon\TrayIcon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="Resources\Icons\TrayIcon\TrayIcon.ico" />
-      <Resource Include="Resources\Icons\TrayIcon\TrayIcon.ico" />
+      <None Remove="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
+      <Resource Include="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_DeploymentManifestIconFile Remove="Assets\TrayIcon\TrayIcon.ico" />
     </ItemGroup>
 
 </Project>
