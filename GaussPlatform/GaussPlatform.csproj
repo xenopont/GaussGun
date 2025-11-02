@@ -13,6 +13,8 @@
       <None Remove="Resources\Icons\TrayIcon\TrayIcon.ico" />
       <None Remove="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
       <Resource Include="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
+      <None Remove="Resources\Icons\TrayIcon\TrayIconBlack.ico" />
+      <Resource Include="Resources\Icons\TrayIcon\TrayIconBlack.ico" />
     </ItemGroup>
 
     <ItemGroup>
