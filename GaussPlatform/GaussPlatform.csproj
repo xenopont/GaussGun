@@ -10,15 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Resources\Icons\TrayIcon\TrayIcon.ico" />
-      <None Remove="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
-      <Resource Include="Resources\Icons\TrayIcon\TrayIconWhite.ico" />
-      <None Remove="Resources\Icons\TrayIcon\TrayIconBlack.ico" />
-      <Resource Include="Resources\Icons\TrayIcon\TrayIconBlack.ico" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_DeploymentManifestIconFile Remove="Assets\TrayIcon\TrayIcon.ico" />
+      <Resource Include="Resources\Icons\TrayIcon\Black.ico" />
+      <Resource Include="Resources\Icons\TrayIcon\White.ico" />
     </ItemGroup>
 
 </Project>

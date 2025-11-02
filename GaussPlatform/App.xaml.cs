@@ -13,7 +13,7 @@ public partial class App
     {
         base.OnStartup(e);
 
-        var stream = (GetResourceStream(new Uri("pack://application:,,,/Resources/Icons/TrayIcon/TrayIconWhite.ico")));
+        var stream = GetResourceStream(new Uri("pack://application:,,,/Resources/Icons/TrayIcon/White.ico"));
         if (stream == null)
         {
             return;
