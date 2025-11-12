@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using GaussPlatform.Services;
+using MessageBox = System.Windows.MessageBox;
 
 namespace GaussPlatform;
 
@@ -7,39 +9,26 @@ namespace GaussPlatform;
 /// </summary>
 public partial class App
 {
-    private NotifyIcon? _notifyIcon;
+    private TrayManager? _trayManager;
         
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-
-        var stream = GetResourceStream(new Uri("pack://application:,,,/Resources/Icons/TrayIcon/White.ico"));
-        if (stream == null)
+        
+        try
         {
-            return;
+            _trayManager = new TrayManager((_, __) => {}, (_, __) => GracefullyShutdown());
         }
-        _notifyIcon = new NotifyIcon
+        catch (Exception exception)
         {
-            Icon = new Icon(stream.Stream),
-            Visible = true,
-            Text = "My WPF Tray App"
-        };
+            MessageBox.Show($"Application cannot be load.\nError: {exception.Message}");
+            GracefullyShutdown();
+        }
+    }
 
-        var contextMenu = new ContextMenuStrip();
-        contextMenu.Items.Add("Show Settings", null, null);
-        contextMenu.Items.Add("Exit", null, OnExitClicked);
-        _notifyIcon.ContextMenuStrip = contextMenu;
-    }
-    
-    protected override void OnExit(ExitEventArgs e)
+    private void GracefullyShutdown()
     {
-        _notifyIcon?.Visible = false;
-        _notifyIcon?.Dispose();
-        base.OnExit(e);
-    }
-    
-    private void OnExitClicked(object? sender, EventArgs e)
-    {
+        _trayManager?.Dispose();
         Shutdown();
     }
 }

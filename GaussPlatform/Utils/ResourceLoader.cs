@@ -7,7 +7,14 @@ public static class ResourceLoader
 {
     public static Stream? Load(string path)
     {
-        var stream = Application.GetResourceStream(new Uri($"pack://application:,,,{path}"));
-        return stream?.Stream;
+        try
+        {
+            var stream = Application.GetResourceStream(new Uri($"pack://application:,,,{path}"));
+            return stream?.Stream;
+        }
+        catch
+        {
+            return null;
+        }
     }
 }
